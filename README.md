@@ -1,6 +1,6 @@
 # Booletania
 
-TODO: Write a gem description
+translating AR booleans in I18n files
 
 ## Installation
 
@@ -20,7 +20,39 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+model
+
+````ruby
+class Invitation < ActiveRecord::Base
+  include Booletania
+end
+```
+
+i18n
+
+````ruby
+ja:
+  booletania:
+    invitation:
+      acceptable:
+        'true': 承諾
+        'false': 拒否
+```
+
+view. if slim
+
+````ruby
+= @post.acceptable_text # => 承諾
+
+# same as
+if @post.acceptable?
+  | 承諾
+else
+  | 拒否
+
+= @post.acceptable? ? '承諾' : '拒否'
+```
+
 
 ## Contributing
 
