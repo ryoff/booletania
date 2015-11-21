@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Booletania::VERSION
   spec.authors       = ["ryoff"]
   spec.email         = ["ryoffes@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{translating AR booleans in I18n files}
+  spec.description   = %q{translating AR booleans in I18n files}
+  spec.homepage      = "https://github.com/ryoff/booletania"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -18,7 +18,9 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
+  spec.add_dependency "rails", "~> 4.1"
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec"
+  spec.add_development_dependency "sqlite3"
 end
