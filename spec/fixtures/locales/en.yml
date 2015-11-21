@@ -1,0 +1,6 @@
+en:
+  booletania:
+    invitation:
+      acceptable:
+        'true': accept
+        'false': deny

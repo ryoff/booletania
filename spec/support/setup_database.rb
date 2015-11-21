@@ -3,7 +3,7 @@ ActiveRecord::Base.establish_connection :test
 
 class CreateAllTables < ActiveRecord::Migration
   def self.up
-    create_table(:posts) do |t|
+    create_table(:invitations) do |t|
       t.boolean :acceptable
     end
   end
