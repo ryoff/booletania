@@ -9,7 +9,6 @@ module Booletania
           end
         RUBY
       end
-      boolean_columns
     end
   end
 end
