@@ -4,9 +4,24 @@ class Invitation < ActiveRecord::Base
   include Booletania
 end
 
+# not AR
+class NotActiveRecord
+  def initialize
+    self.class.__send__(:include, Booletania)
+  end
+end
+
 describe Booletania do
   it 'has a version number' do
     expect(Booletania::VERSION).not_to be nil
+  end
+
+  context "don't extend AR" do
+    subject { NotActiveRecord.new }
+
+    it 'raise ArgumentError' do
+      expect { subject }.to raise_error(ArgumentError)
+    end
   end
 
   describe "_text" do

@@ -1,7 +1,7 @@
 require 'active_record'
 require 'pry'
-require 'pry-byebug'
 require 'pry-doc'
+require 'pry-byebug'
 require 'bundler/setup'
 Bundler.require
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
