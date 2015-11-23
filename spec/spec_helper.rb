@@ -1,6 +1,5 @@
 require 'active_record'
 require 'pry'
-require 'pry-doc'
 require 'pry-byebug'
 require 'bundler/setup'
 Bundler.require
