@@ -4,7 +4,7 @@ ActiveRecord::Base.establish_connection :test
 class CreateAllTables < ActiveRecord::Migration
   def self.up
     create_table(:invitations) do |t|
-      t.boolean :acceptable
+      t.boolean :accepted
     end
   end
 end

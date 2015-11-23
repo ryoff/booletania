@@ -1,6 +1,6 @@
 ja:
   booletania:
     invitation:
-      acceptable:
+      accepted:
         'true': 承諾
         'false': 拒否

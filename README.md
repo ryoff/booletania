@@ -34,7 +34,7 @@ i18n
 ja:
   booletania:
     invitation:
-      acceptable:
+      accepted:
         'true': 承諾
         'false': 拒否
 ```
@@ -47,15 +47,15 @@ ja:
 view. if slim
 
 ````ruby
-= @post.acceptable_text # => 承諾
+= @post.accepted_text # => 承諾
 
 # same as
-if @post.acceptable?
+if @post.accepted?
   | 承諾
 else
   | 拒否
 
-= @post.acceptable? ? '承諾' : '拒否'
+= @post.accepted? ? '承諾' : '拒否'
 ```
 
 
