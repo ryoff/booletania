@@ -39,6 +39,11 @@ ja:
         'false': 拒否
 ```
 
+- why text must need to quote?
+  - [see also]
+  - http://yaml.org/type/bool.html
+  - https://groups.google.com/forum/#!topic/rails-i18n/aL-Ed1Y1KGo
+
 view. if slim
 
 ````ruby
