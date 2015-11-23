@@ -27,5 +27,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry-byebug"
   spec.add_development_dependency "pry-doc"
   spec.add_development_dependency "pry-rails"
-  spec.add_development_dependency "pry-stack_explorer"
 end
