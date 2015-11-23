@@ -47,15 +47,15 @@ ja:
 view. if slim
 
 ````ruby
-= @post.accepted_text # => 承諾
+= @invitation.accepted_text # => 承諾
 
 # same as
-if @post.accepted?
+if @invitation.accepted?
   | 承諾
 else
   | 拒否
 
-= @post.accepted? ? '承諾' : '拒否'
+= @invitation.accepted? ? '承諾' : '拒否'
 ```
 
 
