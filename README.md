@@ -20,6 +20,14 @@ Or install it yourself as:
 
 ## Usage
 
+migration
+
+````ruby
+create_table(:invitations) do |t|
+  t.boolean :accepted
+end
+```
+
 model
 
 ````ruby
@@ -39,25 +47,24 @@ ja:
         'false': 拒否
 ```
 
-- why text must need to quote?
+- why need to quote?
   - [see also]
   - http://yaml.org/type/bool.html
   - https://groups.google.com/forum/#!topic/rails-i18n/aL-Ed1Y1KGo
 
-view. if slim
-
 ````ruby
-= @invitation.accepted_text # => 承諾
+invitation.accepted = true
+invitation.accepted_text # => "承諾"
 
-# same as
-if @invitation.accepted?
-  | 承諾
-else
-  | 拒否
+invitation.accepted = false
+invitation.accepted_text # => "拒否"
 
-= @invitation.accepted? ? '承諾' : '拒否'
+I18n.locale = :en
+invitation.accepted_text # => "deny"
+
+invitation.accepted = true
+invitation.accepted_text # => "accept"
 ```
-
 
 ## Contributing
 
