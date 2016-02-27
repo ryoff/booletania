@@ -1,7 +1,15 @@
 module Booletania
   class Attribute
-    def self.define_methods!(klass, boolean_columns)
-      boolean_columns.each do |boolean_column|
+    class << self
+      def define_methods!(klass, boolean_columns)
+        boolean_columns.each do |boolean_column|
+          define_attributes_text(klass, boolean_column)
+        end
+      end
+
+      private
+
+      def define_attributes_text(klass, boolean_column)
         klass.class_eval <<-RUBY, __FILE__, __LINE__ + 1
           def #{boolean_column.name}_text
             # http://yaml.org/type/bool.html
