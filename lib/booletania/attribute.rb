@@ -3,35 +3,22 @@ module Booletania
     class << self
       def define_methods!(klass, boolean_columns)
         boolean_columns.each do |boolean_column|
-          i18n_attribute_path = booletania_i18n_path(klass, boolean_column)
+          column_obj = Booletania::Column.new(klass, boolean_column)
 
-          define_attribute_text(klass, boolean_column, i18n_attribute_path)
+          define_attribute_text(column_obj)
 
-          define_attribute_options(klass, boolean_column, i18n_attribute_path)
+          define_attribute_options(column_obj)
         end
       end
 
       private
 
-      def define_attribute_text(klass, boolean_column, i18n_attribute_path)
-        klass.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-          def #{boolean_column.name}_text
-            # http://yaml.org/type/bool.html
-            I18n.t "#{i18n_attribute_path}." + #{boolean_column.name}.__send__(:to_s), default: #{boolean_column.name}.__send__(:to_s)
-          end
-        RUBY
+      def define_attribute_text(column_obj)
+        column_obj.klass.class_eval column_obj._text, __FILE__, __LINE__ + 1
       end
 
-      def define_attribute_options(klass, boolean_column, i18n_attribute_path)
-        klass.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-          def self.#{boolean_column.name}_options
-            (I18n.t "#{i18n_attribute_path}", default: {}).invert.map { |k, v| [k, v.to_b] }
-          end
-        RUBY
-      end
-
-      def booletania_i18n_path(klass, boolean_column)
-        "booletania.#{klass.name.underscore}.#{boolean_column.name}"
+      def define_attribute_options(column_obj)
+        column_obj.klass.class_eval column_obj._options, __FILE__, __LINE__ + 1
       end
     end
   end
