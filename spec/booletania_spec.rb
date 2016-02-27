@@ -24,7 +24,7 @@ describe Booletania do
     end
   end
 
-  describe "_text" do
+  describe "#_text" do
     let!(:invitation) { Invitation.create(accepted: accepted) }
     after { Invitation.delete_all }
 
@@ -60,6 +60,16 @@ describe Booletania do
 
         it { is_expected.to eq 'deny' }
       end
+    end
+  end
+
+  describe ".options" do
+    subject { Invitation.accepted_options }
+
+    context "lang is ja" do
+      before { I18n.locale = :ja }
+
+      it { is_expected.to eq [['承諾', true], ['拒否', false]] }
     end
   end
 end
