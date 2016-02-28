@@ -63,13 +63,19 @@ describe Booletania do
     end
   end
 
-  describe ".options" do
+  describe "._options" do
     subject { Invitation.accepted_options }
 
     context "lang is ja" do
       before { I18n.locale = :ja }
 
       it { is_expected.to eq [['承諾', true], ['拒否', false]] }
+    end
+
+    context "lang is en" do
+      before { I18n.locale = :en }
+
+      it { is_expected.to eq [['accept', true], ['deny', false]] }
     end
   end
 end
