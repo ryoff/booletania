@@ -52,7 +52,7 @@ ja:
   - http://yaml.org/type/bool.html
   - https://groups.google.com/forum/#!topic/rails-i18n/aL-Ed1Y1KGo
 
-### #xxx_text method
+### #xxx_text
 ````ruby
 invitation.accepted = true
 invitation.accepted_text # => "承諾"
@@ -67,7 +67,7 @@ invitation.accepted = true
 invitation.accepted_text # => "accept"
 ```
 
-### .xxx_options method
+### .xxx_options
 ````ruby
 Invitation.accepted_options # => [['accept', true], ['deny', false]]
 
