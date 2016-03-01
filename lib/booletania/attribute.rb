@@ -1,13 +1,24 @@
 module Booletania
   class Attribute
-    def self.define_methods!(klass, boolean_columns)
-      boolean_columns.each do |boolean_column|
-        klass.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-          def #{boolean_column.name}_text
-            # http://yaml.org/type/bool.html
-            I18n.t "booletania.#{klass.name.underscore}.#{boolean_column.name}." + #{boolean_column.name}.__send__(:to_s), default: #{boolean_column.name}.__send__(:to_s)
-          end
-        RUBY
+    class << self
+      def define_methods!(klass, boolean_columns)
+        boolean_columns.each do |boolean_column|
+          column_obj = Booletania::Column.new(klass, boolean_column)
+
+          define_attribute_text(column_obj)
+
+          define_attribute_options(column_obj)
+        end
+      end
+
+      private
+
+      def define_attribute_text(column_obj)
+        column_obj.klass.class_eval column_obj._text, __FILE__, __LINE__ + 1
+      end
+
+      def define_attribute_options(column_obj)
+        column_obj.klass.class_eval column_obj._options, __FILE__, __LINE__ + 1
       end
     end
   end

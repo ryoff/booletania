@@ -52,6 +52,7 @@ ja:
   - http://yaml.org/type/bool.html
   - https://groups.google.com/forum/#!topic/rails-i18n/aL-Ed1Y1KGo
 
+### #xxx_text
 ````ruby
 invitation.accepted = true
 invitation.accepted_text # => "承諾"
@@ -64,6 +65,19 @@ invitation.accepted_text # => "deny"
 
 invitation.accepted = true
 invitation.accepted_text # => "accept"
+```
+
+### .xxx_options
+````ruby
+Invitation.accepted_options # => [['accept', true], ['deny', false]]
+
+I18n.locale = :ja
+Invitation.accepted_options # => [["承諾", true], ["拒否", false]]
+```
+
+for use in form
+````ruby
+f.collection_radio_buttons :accepted, Invitation.accepted_options, :last, :first
 ```
 
 ## Contributing

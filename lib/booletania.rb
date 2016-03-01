@@ -1,4 +1,5 @@
 require "booletania/version"
+require "booletania/column"
 require "booletania/attribute"
 
 module Booletania
@@ -8,6 +9,6 @@ module Booletania
     fail ArgumentError, "booletania only support ActiveRecord" unless ancestors.include? ActiveRecord::Base
     fail ArgumentError, "not found .columns method" unless respond_to? :columns
 
-    Attribute.define_methods!(self, columns.select{ |column| column.type == :boolean })
+    Booletania::Attribute.define_methods!(self, columns.select{ |column| column.type == :boolean })
   end
 end
