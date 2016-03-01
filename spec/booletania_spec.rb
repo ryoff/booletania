@@ -77,5 +77,11 @@ describe Booletania do
 
       it { is_expected.to eq [['accept', true], ['deny', false]] }
     end
+
+    context "lans is invalid" do
+      before { I18n.locale = :xx }
+
+      it { is_expected.to eq [] }
+    end
   end
 end
