@@ -22,7 +22,7 @@ Or install it yourself as:
 
 migration
 
-````ruby
+```ruby
 create_table(:invitations) do |t|
   t.boolean :accepted
 end
@@ -30,7 +30,7 @@ end
 
 model
 
-````ruby
+```ruby
 class Invitation < ActiveRecord::Base
   include Booletania
 end
@@ -38,7 +38,7 @@ end
 
 i18n
 
-````ruby
+```ruby
 ja:
   booletania:
     invitation:
@@ -53,7 +53,7 @@ ja:
   - https://groups.google.com/forum/#!topic/rails-i18n/aL-Ed1Y1KGo
 
 ### #xxx_text
-````ruby
+```ruby
 invitation.accepted = true
 invitation.accepted_text # => "承諾"
 
@@ -68,7 +68,7 @@ invitation.accepted_text # => "accept"
 ```
 
 ### .xxx_options
-````ruby
+```ruby
 Invitation.accepted_options # => [['accept', true], ['deny', false]]
 
 I18n.locale = :ja
@@ -76,7 +76,7 @@ Invitation.accepted_options # => [["承諾", true], ["拒否", false]]
 ```
 
 for use in form
-````ruby
+```ruby
 f.collection_radio_buttons :accepted, Invitation.accepted_options, :last, :first
 ```
 
