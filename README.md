@@ -1,6 +1,8 @@
 # Booletania
 
-translating AR booleans in I18n files
+[![Build Status](https://travis-ci.org/ryoff/booletania.svg?branch=master)](https://travis-ci.org/ryoff/booletania)
+
+Translate ActiveRecord's boolean column
 
 ## Installation
 
