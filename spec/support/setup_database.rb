@@ -1,7 +1,7 @@
-ActiveRecord::Base.configurations = {'test' => {adapter: 'sqlite3', database: ':memory:'}}
+ActiveRecord::Base.configurations = YAML.load_file("config/database.yml")
 ActiveRecord::Base.establish_connection :test
 
-class CreateAllTables < ActiveRecord::Migration
+class CreateAllTables < ActiveRecord::Migration[4.2]
   def self.up
     create_table(:invitations) do |t|
       t.boolean :accepted
