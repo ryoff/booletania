@@ -6,7 +6,5 @@ rvm:
   - 2.5.0
 before_install: gem install bundler -v 1.16.0
 cache: bundler
-test:
-  adapter: sqlite3
-  database: ":memory:"
-  timeout: 500
+before_script:
+  - cp config/database.travis.yml config/database.yml
