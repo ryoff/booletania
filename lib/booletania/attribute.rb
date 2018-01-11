@@ -18,7 +18,7 @@ module Booletania
       end
 
       def define_attribute_options(column_obj)
-        column_obj.klass.class_eval column_obj._options, __FILE__, __LINE__ + 1
+        column_obj.klass.instance_eval column_obj._options, __FILE__, __LINE__ + 1
       end
     end
   end

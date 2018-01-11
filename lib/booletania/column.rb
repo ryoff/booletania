@@ -21,7 +21,7 @@ module Booletania
 
     def _options
       <<-RUBY
-        def self.#{boolean_column.name}_options
+        def #{boolean_column.name}_options
           (I18n.t "#{booletania_i18n_path}", default: {}).invert.map { |k, v| [k, v.to_b] }
         end
       RUBY
