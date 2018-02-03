@@ -1,5 +1,5 @@
 require "booletania/version"
-require "booletania/column"
+require "booletania/method"
 require "booletania/attribute"
 
 module Booletania
