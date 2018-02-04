@@ -30,9 +30,19 @@ module Booletania
 
     private
 
+    # For example,
+    #   [
+    #     :booletania.invitation.accepted.true,
+    #     :activerecord.attributes.invitation/accepted.true
+    #   ]
+    # For example,
+    #   [
+    #     :booletania.invitation.accepted.false,
+    #     :activerecord.attributes.invitation/accepted.false
+    #   ]
     def i18n_keys(true_or_false)
       i18n_path_keys.map do |i18n_path_key|
-        (i18n_path_key.to_s + '.' + true_or_false.to_s).to_sym
+        (i18n_path_key.to_s + '.' + true_or_false.to_b.to_s).to_sym
       end
     end
 
@@ -46,10 +56,12 @@ module Booletania
       end
     end
 
+    # For example, :booletania.invitation.accepted
     def booletania_i18n_path_key
       :"booletania.#{klass.name.underscore}.#{boolean_column.name}"
     end
 
+    # For example, :activerecord.attributes.invitation/accepted
     def activerecord_i18n_path_key
       :"activerecord.attributes.#{klass.name.underscore}/#{boolean_column.name}"
     end
