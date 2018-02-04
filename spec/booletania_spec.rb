@@ -25,22 +25,22 @@ describe Booletania do
   end
 
   describe "#_text" do
-    let!(:invitation) { Invitation.create(accepted: accepted) }
+    let!(:invitation) { Invitation.create(accepted1: accepted1) }
     after { Invitation.delete_all }
 
-    subject { invitation.accepted_text }
+    subject { invitation.accepted1_text }
 
     context "lang is ja" do
       before { I18n.locale = :ja }
 
       context "column is true" do
-        let(:accepted) { true }
+        let(:accepted1) { true }
 
         it { is_expected.to eq '承諾' }
       end
 
       context "column is false" do
-        let(:accepted) { false }
+        let(:accepted1) { false }
 
         it { is_expected.to eq '拒否' }
       end
@@ -50,13 +50,13 @@ describe Booletania do
       before { I18n.locale = :en }
 
       context "column is true" do
-        let(:accepted) { true }
+        let(:accepted1) { true }
 
         it { is_expected.to eq 'accept' }
       end
 
       context "column is false" do
-        let(:accepted) { false }
+        let(:accepted1) { false }
 
         it { is_expected.to eq 'deny' }
       end
@@ -64,7 +64,7 @@ describe Booletania do
   end
 
   describe "._options" do
-    subject { Invitation.accepted_options }
+    subject { Invitation.accepted1_options }
 
     context "lang is ja" do
       before { I18n.locale = :ja }
