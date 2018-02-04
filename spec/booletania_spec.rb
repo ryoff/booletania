@@ -96,6 +96,13 @@ describe Booletania do
           it { is_expected.to eq 'ng' }
         end
       end
+
+      context "lans is invalid" do
+        before { I18n.locale = :xx }
+        let(:accepted) { true }
+
+        it { is_expected.to eq 'True' }
+      end
     end
 
     describe "#accepted1_text. has only a :booletania i18n key" do
