@@ -1,5 +1,5 @@
 module Booletania
-  class Column
+  class Method
     attr_reader :klass, :boolean_column
 
     def initialize(klass, boolean_column)
