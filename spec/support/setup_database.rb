@@ -11,6 +11,7 @@ class CreateAllTables < ActiveRecord::VERSION::MAJOR >= 5 ? ActiveRecord::Migrat
       t.boolean :accepted1
       t.boolean :accepted2
       t.boolean :accepted3
+      t.boolean :accepted4
     end
   end
 end

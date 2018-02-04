@@ -25,10 +25,11 @@ describe Booletania do
   end
 
   describe "#_text" do
-    let!(:invitation) { Invitation.create(accepted1: accepted1, accepted2: accepted2, accepted3: accepted3) }
+    let!(:invitation) { Invitation.create(accepted1: accepted1, accepted2: accepted2, accepted3: accepted3, accepted4: accepted4) }
     let(:accepted1) { true }
     let(:accepted2) { true }
     let(:accepted3) { true }
+    let(:accepted4) { true }
     after { Invitation.delete_all }
 
     shared_examples_for 'translated by :booletania i18n key' do
@@ -111,7 +112,7 @@ describe Booletania do
       it_behaves_like 'translated by :booletania i18n key'
     end
 
-    describe "#accepted2_text. has :booletania and :activerecord i18n key" do
+    describe "#accepted2_text. has :booletania and :activerecord i18n keys" do
       subject { invitation.accepted2_text }
       let(:accepted2) { accepted }
       it_behaves_like 'translated by :booletania i18n key'
@@ -121,6 +122,20 @@ describe Booletania do
       subject { invitation.accepted3_text }
       let(:accepted3) { accepted }
       it_behaves_like 'translated by :activerecord i18n key'
+    end
+
+    describe "#accepted4_text. do not have any i18n keys" do
+      subject { invitation.accepted4_text }
+
+      context "column is true" do
+        let(:accepted4) { true }
+        it { is_expected.to eq 'True' }
+      end
+
+      context "column is false" do
+        let(:accepted4) { false }
+        it { is_expected.to eq 'False' }
+      end
     end
   end
 
@@ -164,7 +179,7 @@ describe Booletania do
       it_behaves_like 'translated by :booletania i18n key'
     end
 
-    describe ".accepted2_options. has :booletania and :activerecord i18n key" do
+    describe ".accepted2_options. has :booletania and :activerecord i18n keys" do
       subject { Invitation.accepted2_options }
       it_behaves_like 'translated by :booletania i18n key'
     end
@@ -172,6 +187,25 @@ describe Booletania do
     describe ".accepted3_options. has only a :activerecord i18n key" do
       subject { Invitation.accepted3_options }
       it_behaves_like 'translated by :activerecord i18n key'
+    end
+
+    describe ".accepted4_options. do not have any i18n keys" do
+      subject { Invitation.accepted4_options }
+
+      context "lang is ja" do
+        before { I18n.locale = :ja }
+        it { is_expected.to eq [] }
+      end
+
+      context "lang is en" do
+        before { I18n.locale = :en }
+        it { is_expected.to eq [] }
+      end
+
+      context "lans is invalid" do
+        before { I18n.locale = :xx }
+        it { is_expected.to eq [] }
+      end
     end
   end
 end
