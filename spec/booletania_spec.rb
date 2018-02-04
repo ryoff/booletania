@@ -98,7 +98,7 @@ describe Booletania do
       end
     end
 
-    describe "#accepted1_text. only has :booletania i18n key" do
+    describe "#accepted1_text. has only a :booletania i18n key" do
       subject { invitation.accepted1_text }
       let(:accepted1) { accepted }
       it_behaves_like 'translated by :booletania i18n key'
@@ -110,7 +110,7 @@ describe Booletania do
       it_behaves_like 'translated by :booletania i18n key'
     end
 
-    describe "#accepted3_text. has only :activerecord i18n key" do
+    describe "#accepted3_text. has only a :activerecord i18n key" do
       subject { invitation.accepted3_text }
       let(:accepted3) { accepted }
       it_behaves_like 'translated by :activerecord i18n key'
@@ -118,24 +118,53 @@ describe Booletania do
   end
 
   describe "._options" do
-    subject { Invitation.accepted1_options }
+    shared_examples_for 'translated by :booletania i18n key' do
+      context "lang is ja" do
+        before { I18n.locale = :ja }
+        it { is_expected.to eq [['承諾', true], ['拒否', false]] }
+      end
 
-    context "lang is ja" do
-      before { I18n.locale = :ja }
+      context "lang is en" do
+        before { I18n.locale = :en }
+        it { is_expected.to eq [['accept', true], ['deny', false]] }
+      end
 
-      it { is_expected.to eq [['承諾', true], ['拒否', false]] }
+      context "lans is invalid" do
+        before { I18n.locale = :xx }
+        it { is_expected.to eq [] }
+      end
     end
 
-    context "lang is en" do
-      before { I18n.locale = :en }
+    shared_examples_for 'translated by :activerecord i18n key' do
+      context "lang is ja" do
+        before { I18n.locale = :ja }
+        it { is_expected.to eq [['許可', true], ['不可', false]] }
+      end
 
-      it { is_expected.to eq [['accept', true], ['deny', false]] }
+      context "lang is en" do
+        before { I18n.locale = :en }
+        it { is_expected.to eq [['ok', true], ['ng', false]] }
+      end
+
+      context "lans is invalid" do
+        before { I18n.locale = :xx }
+        it { is_expected.to eq [] }
+      end
     end
 
-    context "lans is invalid" do
-      before { I18n.locale = :xx }
+    describe ".accepted1_options. has only a :booletania i18n key" do
+      subject { Invitation.accepted1_options }
+      it_behaves_like 'translated by :booletania i18n key'
+    end
 
-      it { is_expected.to eq [] }
+    describe ".accepted2_options. has :booletania and :activerecord i18n key" do
+      subject { Invitation.accepted2_options }
+      it_behaves_like 'translated by :booletania i18n key'
+    end
+
+    describe ".accepted3_options. has only a :activerecord i18n key" do
+      subject { Invitation.accepted3_options }
+      it_behaves_like 'translated by :activerecord i18n key'
     end
   end
 end
