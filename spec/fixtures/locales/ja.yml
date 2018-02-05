@@ -1,6 +1,17 @@
 ja:
+  activerecord:
+    attributes:
+      invitation/accepted2:
+        'true': 許可
+        'false': 不可
+      invitation/accepted3:
+        'true': 許可
+        'false': 不可
   booletania:
     invitation:
-      accepted:
+      accepted1:
+        'true': 承諾
+        'false': 拒否
+      accepted2:
         'true': 承諾
         'false': 拒否

@@ -7,24 +7,63 @@ module Booletania
       @boolean_column = boolean_column
     end
 
-    def booletania_i18n_path
-      "booletania.#{klass.name.underscore}.#{boolean_column.name}"
-    end
-
     def _text
+      i18n_true_keys = i18n_keys('true') + [true.to_s.humanize]
+      i18n_false_keys = i18n_keys('false') + [false.to_s.humanize]
       <<-RUBY
         def #{boolean_column.name}_text
-          I18n.t "#{booletania_i18n_path}." + #{boolean_column.name}.__send__(:to_s), default: #{boolean_column.name}.__send__(:to_s)
+          keys = #{boolean_column.name}? ? #{i18n_true_keys} : #{i18n_false_keys}
+
+          I18n.t(keys[0], default: keys[1..-1])
         end
       RUBY
     end
 
     def _options
+      path_keys = i18n_path_keys + [{}]
       <<-RUBY
         def #{boolean_column.name}_options
-          (I18n.t "#{booletania_i18n_path}", default: {}).invert.map { |k, v| [k, v.to_b] }
+          I18n.t("#{path_keys[0]}", default: #{path_keys[1..-1]}).invert.map { |k, v| [k, v.to_b] }
         end
       RUBY
+    end
+
+    private
+
+    # For example,
+    #   [
+    #     :booletania.invitation.accepted.true,
+    #     :activerecord.attributes.invitation/accepted.true
+    #   ]
+    # For example,
+    #   [
+    #     :booletania.invitation.accepted.false,
+    #     :activerecord.attributes.invitation/accepted.false
+    #   ]
+    def i18n_keys(true_or_false)
+      i18n_path_keys.map do |i18n_path_key|
+        (i18n_path_key.to_s + '.' + true_or_false.to_b.to_s).to_sym
+      end
+    end
+
+    def i18n_path_keys
+      @i18n_path_keys ||= begin
+        [].tap do |list|
+          list << booletania_i18n_path_key
+          list << activerecord_i18n_path_key
+          list
+        end
+      end
+    end
+
+    # For example, :booletania.invitation.accepted
+    def booletania_i18n_path_key
+      :"booletania.#{klass.name.underscore}.#{boolean_column.name}"
+    end
+
+    # For example, :activerecord.attributes.invitation/accepted
+    def activerecord_i18n_path_key
+      :"activerecord.attributes.#{klass.name.underscore}/#{boolean_column.name}"
     end
   end
 end

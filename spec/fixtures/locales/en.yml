@@ -1,6 +1,17 @@
 en:
+  activerecord:
+    attributes:
+      invitation/accepted2:
+        'true': ok
+        'false': ng
+      invitation/accepted3:
+        'true': ok
+        'false': ng
   booletania:
     invitation:
-      accepted:
+      accepted1:
+        'true': accept
+        'false': deny
+      accepted2:
         'true': accept
         'false': deny

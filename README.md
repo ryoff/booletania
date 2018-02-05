@@ -42,6 +42,15 @@ i18n
 
 ```ruby
 ja:
+  activerecord:
+    attributes:
+      invitation/accepted:
+        'true': 承諾
+        'false': 拒否
+```
+or
+```ruby
+ja:
   booletania:
     invitation:
       accepted:
