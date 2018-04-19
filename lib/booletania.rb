@@ -7,8 +7,11 @@ module Booletania
 
   included do
     raise ArgumentError, "booletania only support ActiveRecord" unless ancestors.include? ActiveRecord::Base
-    raise ArgumentError, "not found .columns method" unless respond_to? :columns
+  end
 
-    Booletania::Attribute.define_methods!(self, columns.select{ |column| column.type == :boolean })
+  class_methods do
+    def booletania_columns(*columns)
+      Booletania::Attribute.define_methods!(self, columns)
+    end
   end
 end

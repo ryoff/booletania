@@ -1,9 +1,9 @@
 module Booletania
   class Attribute
     class << self
-      def define_methods!(klass, boolean_columns)
-        boolean_columns.each do |boolean_column|
-          method_obj = Booletania::Method.new(klass, boolean_column)
+      def define_methods!(klass, boolean_column_names)
+        boolean_column_names.each do |boolean_column_name|
+          method_obj = Booletania::Method.new(klass, boolean_column_name.to_s)
 
           define_attribute_text(method_obj)
 
