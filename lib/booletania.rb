@@ -3,13 +3,14 @@ require "booletania/method"
 require "booletania/attribute"
 
 module Booletania
-  extend ActiveSupport::Concern
-
-  included do
-    raise ArgumentError, "booletania only support ActiveRecord" unless ancestors.include? ActiveRecord::Base
+  def self.included(base)
+    base.extend ClassMethods
+    base.class_eval do
+      raise ArgumentError, "booletania only support ActiveRecord" unless ancestors.include? ActiveRecord::Base
+    end
   end
 
-  class_methods do
+  module ClassMethods
     def booletania_columns(*columns)
       Booletania::Attribute.define_methods!(self, columns)
     end
