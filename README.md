@@ -35,6 +35,7 @@ model
 ```ruby
 class Invitation < ActiveRecord::Base
   include Booletania
+  booletania_columns :accepted
 end
 ```
 
