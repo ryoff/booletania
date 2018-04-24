@@ -2,6 +2,7 @@ require 'spec_helper'
 
 class Invitation < ActiveRecord::Base
   include Booletania
+  booletania_columns :accepted1, :accepted2, :accepted3, :accepted4
 end
 
 # not AR
