@@ -8,8 +8,8 @@ module Booletania
     end
 
     def _text
-      i18n_true_keys = i18n_keys('true') + [true.to_s.humanize]
-      i18n_false_keys = i18n_keys('false') + [false.to_s.humanize]
+      i18n_true_keys = i18n_keys(true) + [true.to_s.humanize]
+      i18n_false_keys = i18n_keys(false) + [false.to_s.humanize]
       <<-RUBY
         def #{boolean_column_name}_text
           keys = #{boolean_column_name}? ? #{i18n_true_keys} : #{i18n_false_keys}
@@ -23,7 +23,7 @@ module Booletania
       path_keys = i18n_path_keys + [{}]
       <<-RUBY
         def #{boolean_column_name}_options
-          I18n.t("#{path_keys[0]}", default: #{path_keys[1..-1]}).invert.map { |k, v| [k, v.to_b] }
+          I18n.t("#{path_keys[0]}", default: #{path_keys[1..-1]}).invert.map { |k, v| [k, v.to_s.downcase == 'true' ? true : false] }
         end
       RUBY
     end
@@ -42,7 +42,7 @@ module Booletania
     #   ]
     def i18n_keys(true_or_false)
       i18n_path_keys.map do |i18n_path_key|
-        (i18n_path_key.to_s + '.' + true_or_false.to_b.to_s).to_sym
+        (i18n_path_key.to_s + '.' + true_or_false.to_s).to_sym
       end
     end
 
